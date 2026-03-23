@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Session | Joey Lowery Fitness</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="schedule.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Ambient glow effects -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-j">J</span><span class="logo-l">L</span>
+                <span class="logo-text">Joey Lowery</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="schedule.html" class="active">Schedule</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="schedule.html" class="nav-cta">Book Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Schedule Hero -->
+    <section class="schedule-hero">
+        <div class="section-container">
+            <div class="section-label centered">
+                <div class="label-line"></div>
+                <span>SCHEDULING</span>
+                <div class="label-line"></div>
+            </div>
+            <h1 class="section-title centered">Book Your <span class="text-gradient">Training Session</span></h1>
+            <p class="section-subtitle">Select a date and time that works for you. All sessions are held at my private home gym.</p>
+        </div>
+    </section>
+
+    <!-- Scheduling Tool -->
+    <section class="scheduler-section">
+        <div class="section-container">
+            <div class="scheduler-layout">
+
+                <!-- Left: Calendar & Time Slots -->
+                <div class="scheduler-main">
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <span>Select Date</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-circle">2</div>
+                            <span>Choose Time</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-circle">3</div>
+                            <span>Your Details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="4">
+                            <div class="step-circle">4</div>
+                            <span>Confirm</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Calendar -->
+                    <div class="scheduler-step" id="step1">
+                        <div class="calendar-widget">
+                            <div class="calendar-header">
+                                <button class="cal-nav" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h3 id="calendarMonth"></h3>
+                                <button class="cal-nav" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar-weekdays">
+                                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                            </div>
+                            <div class="calendar-days" id="calendarDays"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Time Slots -->
+                    <div class="scheduler-step hidden" id="step2">
+                        <div class="time-slot-header">
+                            <button class="back-btn" id="backToCalendar">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <h3>Available Times for <span id="selectedDateDisplay"></span></h3>
+                        </div>
+                        <div class="time-period">
+                            <h4><i class="fas fa-sun"></i> Morning</h4>
+                            <div class="time-slots" id="morningSlots"></div>
+                        </div>
+                        <div class="time-period">
+                            <h4><i class="fas fa-cloud-sun"></i> Afternoon</h4>
+                            <div class="time-slots" id="afternoonSlots"></div>
+                        </div>
+                        <div class="time-period">
+                            <h4><i class="fas fa-moon"></i> Evening</h4>
+                            <div class="time-slots" id="eveningSlots"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Booking Form -->
+                    <div class="scheduler-step hidden" id="step3">
+                        <div class="time-slot-header">
+                            <button class="back-btn" id="backToTime">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <h3>Your Information</h3>
+                        </div>
+                        <form class="booking-form" id="bookingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="bookName" name="name" required placeholder=" ">
+                                    <label for="bookName">Full Name</label>
+                                    <div class="form-line"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="bookPhone" name="phone" required placeholder=" ">
+                                    <label for="bookPhone">Phone Number</label>
+                                    <div class="form-line"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="bookEmail" name="email" required placeholder=" ">
+                                <label for="bookEmail">Email Address</label>
+                                <div class="form-line"></div>
+                            </div>
+                            <div class="form-group">
+                                <select id="bookProgram" name="program" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="youth">Youth Athletic Development</option>
+                                    <option value="personal">1-on-1 Personal Training</option>
+                                    <option value="transformation">Body Transformation</option>
+                                    <option value="consultation">Free Consultation</option>
+                                </select>
+                                <label for="bookProgram">Session Type</label>
+                                <div class="form-line"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="bookNotes" name="notes" rows="3" placeholder=" "></textarea>
+                                <label for="bookNotes">Notes or goals (optional)</label>
+                                <div class="form-line"></div>
+                            </div>
+
+                            <!-- GoCanvas Integration -->
+                            <div class="gocanvas-section">
+                                <div class="gocanvas-badge">
+                                    <i class="fas fa-file-signature"></i>
+                                    <div>
+                                        <h5>New Client? Complete Your Intake Form</h5>
+                                        <p>Fill out our GoCanvas intake form to help us prepare for your first session.</p>
+                                    </div>
+                                </div>
+                                <div class="gocanvas-actions">
+                                    <label class="gocanvas-checkbox">
+                                        <input type="checkbox" id="isNewClient" name="isNewClient">
+                                        <span class="checkmark"></span>
+                                        <span>I'm a new client (first session)</span>
+                                    </label>
+                                    <div class="gocanvas-form-link hidden" id="gocanvasLink">
+                                        <a href="#" class="btn btn-secondary btn-sm" id="openGoCanvasForm">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Open Intake Form (GoCanvas)</span>
+                                        </a>
+                                        <p class="gocanvas-note">You can also complete this after booking.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <span>Review Booking</span>
+                                <i class="fas fa-arrow-right"></i>
+                                <div class="btn-glow"></div>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Step 4: Confirmation -->
+                    <div class="scheduler-step hidden" id="step4">
+                        <div class="confirmation-card">
+                            <div class="confirm-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3>Review Your Booking</h3>
+                            <div class="confirm-details" id="confirmDetails"></div>
+
+                            <!-- Status Tracker (Arrivy-style) -->
+                            <div class="status-tracker">
+                                <h4>Session Status</h4>
+                                <div class="status-timeline">
+                                    <div class="status-item active">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Booking Submitted</span>
+                                            <span class="status-time" id="statusTime1">Just now</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item pending">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Confirmation Pending</span>
+                                            <span class="status-time">Awaiting review</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item pending">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Confirmed</span>
+                                            <span class="status-time">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item pending">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Session Complete</span>
+                                            <span class="status-time">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="confirm-actions">
+                                <button class="btn btn-primary" id="confirmBooking">
+                                    <span>Confirm Booking</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                                <button class="btn btn-secondary" id="backToForm">
+                                    <span>Edit Details</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Success -->
+                    <div class="scheduler-step hidden" id="stepSuccess">
+                        <div class="success-card">
+                            <div class="success-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2>You're Booked!</h2>
+                            <p>Your training session has been scheduled. You'll receive a confirmation text and email shortly.</p>
+                            <div class="confirm-details" id="successDetails"></div>
+
+                            <div class="status-tracker">
+                                <h4>Live Session Tracker</h4>
+                                <div class="status-timeline">
+                                    <div class="status-item completed">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Booking Submitted</span>
+                                            <span class="status-time" id="successTime1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item active">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Confirmed</span>
+                                            <span class="status-time">Just now</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item pending">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Reminder Sent</span>
+                                            <span class="status-time">1 hour before session</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-item pending">
+                                        <div class="status-dot"></div>
+                                        <div class="status-info">
+                                            <span class="status-label">Session Complete</span>
+                                            <span class="status-time">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="success-actions">
+                                <a href="index.html" class="btn btn-secondary">
+                                    <i class="fas fa-home"></i>
+                                    <span>Back to Home</span>
+                                </a>
+                                <button class="btn btn-primary" id="bookAnother">
+                                    <span>Book Another Session</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                            </div>
+
+                            <!-- GoCanvas Follow-up -->
+                            <div class="gocanvas-followup" id="gocanvasFollowup">
+                                <div class="gocanvas-badge">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <div>
+                                        <h5>Complete Your GoCanvas Forms</h5>
+                                        <p>Please fill out the required forms before your session.</p>
+                                    </div>
+                                </div>
+                                <div class="gocanvas-form-buttons">
+                                    <a href="#" class="btn btn-secondary btn-sm" id="gocanvasIntake">
+                                        <i class="fas fa-file-medical"></i>
+                                        <span>Health & Intake Form</span>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" id="gocanvasWaiver">
+                                        <i class="fas fa-file-contract"></i>
+                                        <span>Liability Waiver</span>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary btn-sm" id="gocanvasGoals">
+                                        <i class="fas fa-bullseye"></i>
+                                        <span>Goals Assessment</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Sidebar -->
+                <div class="scheduler-sidebar">
+                    <!-- Booking Summary -->
+                    <div class="sidebar-card summary-card">
+                        <h4><i class="fas fa-clipboard-list"></i> Booking Summary</h4>
+                        <div class="summary-items">
+                            <div class="summary-item">
+                                <span class="summary-label">Date</span>
+                                <span class="summary-value" id="summaryDate">Not selected</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Time</span>
+                                <span class="summary-value" id="summaryTime">Not selected</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Duration</span>
+                                <span class="summary-value">60 minutes</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Location</span>
+                                <span class="summary-value">Private Home Gym</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Trainer</span>
+                                <span class="summary-value">Joey Lowery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Sessions -->
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-calendar-alt"></i> Your Sessions</h4>
+                        <div class="upcoming-sessions" id="upcomingSessions">
+                            <div class="no-sessions">
+                                <i class="fas fa-calendar-plus"></i>
+                                <p>No upcoming sessions</p>
+                                <span>Book your first session to get started!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GoCanvas Quick Links -->
+                    <div class="sidebar-card gocanvas-card">
+                        <h4><i class="fas fa-file-alt"></i> GoCanvas Forms</h4>
+                        <p class="sidebar-description">Complete required forms digitally before your session.</p>
+                        <div class="gocanvas-links">
+                            <a href="#" class="gocanvas-link-item" data-form="intake">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Health Intake</span>
+                                <i class="fas fa-external-link-alt link-arrow"></i>
+                            </a>
+                            <a href="#" class="gocanvas-link-item" data-form="waiver">
+                                <i class="fas fa-file-contract"></i>
+                                <span>Liability Waiver</span>
+                                <i class="fas fa-external-link-alt link-arrow"></i>
+                            </a>
+                            <a href="#" class="gocanvas-link-item" data-form="goals">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Goals Assessment</span>
+                                <i class="fas fa-external-link-alt link-arrow"></i>
+                            </a>
+                            <a href="#" class="gocanvas-link-item" data-form="progress">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Progress Tracker</span>
+                                <i class="fas fa-external-link-alt link-arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Info Card -->
+                    <div class="sidebar-card info-card">
+                        <h4><i class="fas fa-info-circle"></i> Session Info</h4>
+                        <ul class="info-list">
+                            <li><i class="fas fa-check"></i> Free consultation for first-timers</li>
+                            <li><i class="fas fa-check"></i> 24hr cancellation policy</li>
+                            <li><i class="fas fa-check"></i> Text/email reminders</li>
+                            <li><i class="fas fa-check"></i> All equipment provided</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GoCanvas Modal -->
+    <div class="modal-overlay hidden" id="gocanvasModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h3 id="modalTitle">GoCanvas Form</h3>
+                <p id="modalDescription">Complete this form to prepare for your training session.</p>
+            </div>
+            <div class="modal-body">
+                <!-- GoCanvas form embed placeholder -->
+                <div class="gocanvas-embed" id="gocanvasEmbed">
+                    <div class="embed-placeholder">
+                        <i class="fas fa-plug"></i>
+                        <h4>GoCanvas Form Integration</h4>
+                        <p>Your GoCanvas form will be embedded here. Configure your GoCanvas Web Form URL in the settings to enable this feature.</p>
+                        <div class="embed-config">
+                            <code>Configure in schedule.js: GOCANVAS_CONFIG.formUrls</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <span class="logo-j">J</span><span class="logo-l">L</span>
+                    </a>
+                    <p>Elite personal training in a private home gym. Building stronger bodies and stronger lives.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#programs">Programs</a>
+                    <a href="schedule.html">Schedule</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Joey Lowery Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="schedule.js"></script>
+</body>
+</html>
